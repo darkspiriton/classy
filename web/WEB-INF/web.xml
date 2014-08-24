@@ -4,9 +4,17 @@
         <servlet-name>RegistroUsuarioServlet</servlet-name>
         <servlet-class>pe.edu.ulima.classy.RegistroUsuarioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegistroUsuarioDespuesServlet</servlet-name>
+        <servlet-class>pe.edu.ulima.classy.RegistroUsuarioDespuesServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistroUsuarioServlet</servlet-name>
         <url-pattern>/RegistroUsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistroUsuarioDespuesServlet</servlet-name>
+        <url-pattern>/RegistroUsuarioDespuesServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

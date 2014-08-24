@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.ulima.classy.AutenticacionAdapter.NombreMail;
 
 /**
  *
  * @author hquintana
  */
-public class RegistroUsuarioServlet extends HttpServlet {
+public class RegistroUsuarioDespuesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,16 +32,34 @@ public class RegistroUsuarioServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        GestorUsuario gestor = new GestorUsuario();
+        HttpSession session = request.getSession();
+        String tipoLogin = (String)session.getAttribute("tipo-login");
+        NombreMail datos = null;
+        if (tipoLogin.equals("twitter")){
+            String verifier = request.getParameter("oauth_verifier");
+            datos = gestor.obtenerDatosUsuarioTwitter(
+                verifier, session);
+        }else if (tipoLogin.equals("facebook")){
+            String code = request.getParameter("code");
+            datos = gestor.obtenerDatosUsuarioFacebook(
+                code, session);
+        }
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegistroUsuarioServlet</title>");            
+            out.println("<title>Servlet RegistroUsuarioDespuesServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegistroUsuarioServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Regreso de la autenticacion</h1>");
+            out.println("<p>Screen name : " + datos.nombre + "</p>");
+            out.println("<p>Name : " + datos.mail + "</p>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,30 +77,7 @@ public class RegistroUsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        StringBuffer callbackURL = request.getRequestURL();
-        int index = callbackURL.lastIndexOf("/");
-        callbackURL.replace(
-                index, callbackURL.length(), "").append(
-                        "/RegistroUsuarioDespuesServlet");
-        
-        String tipo = request.getParameter("tipo");
-        
-        GestorUsuario gestor = new GestorUsuario();
-        String url = "";
-        HttpSession session = request.getSession();
-        if (tipo.equals("twitter")){
-           session.setAttribute("tipo-login", "twitter");           
-           url = gestor.obtenerAuthorizationURLTwitter(callbackURL.toString(),
-                session);
-        }else if (tipo.equals("facebook")){
-            session.setAttribute("tipo-login", "facebook");
-            url = gestor.obtenerAuthorizationURLFacebook(callbackURL.toString(),
-                session);
-        }
-        
-        response.sendRedirect(url);
+        processRequest(request, response);
     }
 
     /**
