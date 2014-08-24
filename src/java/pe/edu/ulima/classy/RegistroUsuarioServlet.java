@@ -67,17 +67,17 @@ public class RegistroUsuarioServlet extends HttpServlet {
                         "/RegistroUsuarioDespuesServlet");
         
         String tipo = request.getParameter("tipo");
-        
-        GestorUsuario gestor = new GestorUsuario();
         String url = "";
         HttpSession session = request.getSession();
         if (tipo.equals("twitter")){
            session.setAttribute("tipo-login", "twitter");           
-           url = gestor.obtenerAuthorizationURLTwitter(callbackURL.toString(),
+           url = GestorUsuario.getInstance().obtenerAuthorizationURLTwitter(
+                   callbackURL.toString(),
                 session);
         }else if (tipo.equals("facebook")){
             session.setAttribute("tipo-login", "facebook");
-            url = gestor.obtenerAuthorizationURLFacebook(callbackURL.toString(),
+            url = GestorUsuario.getInstance().obtenerAuthorizationURLFacebook(
+                    callbackURL.toString(),
                 session);
         }
         

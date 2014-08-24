@@ -32,19 +32,16 @@ public class RegistroUsuarioDespuesServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        GestorUsuario gestor = new GestorUsuario();
         HttpSession session = request.getSession();
         String tipoLogin = (String)session.getAttribute("tipo-login");
         NombreMail datos = null;
         if (tipoLogin.equals("twitter")){
             String verifier = request.getParameter("oauth_verifier");
-            datos = gestor.obtenerDatosUsuarioTwitter(
+            datos = GestorUsuario.getInstance().obtenerDatosUsuarioTwitter(
                 verifier, session);
         }else if (tipoLogin.equals("facebook")){
             String code = request.getParameter("code");
-            datos = gestor.obtenerDatosUsuarioFacebook(
+            datos = GestorUsuario.getInstance().obtenerDatosUsuarioFacebook(
                 code, session);
         }
 

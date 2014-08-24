@@ -16,6 +16,17 @@ import pe.edu.ulima.classy.AutenticacionAdapter.NombreMail;
  * @author hquintana
  */
 public class GestorUsuario {
+    private static GestorUsuario gestor = null;
+    
+    private GestorUsuario(){}
+    
+    public static GestorUsuario getInstance(){
+        if (gestor == null){
+            gestor = new GestorUsuario();
+        }
+        return gestor;
+    }
+    
     public String obtenerAuthorizationURLTwitter(String callback, HttpSession session){
         AutenticacionAdapter autenticacionAdapter = new AutenticacionTwitter();
         try {
