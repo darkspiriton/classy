@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pe.edu.ulima.classy;
+package pe.edu.ulima.classy.seguridad;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +17,7 @@ public interface AutenticacionAdapter {
     public NombreMail getDatosPersonales(String verifier, HttpSession session) 
             throws Exception;
     public class NombreMail{
-        String nombre;
-        String mail;
+        public String nombre;
+        public String mail;
     }
 }

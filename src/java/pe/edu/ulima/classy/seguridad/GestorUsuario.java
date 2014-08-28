@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package pe.edu.ulima.classy;
+package pe.edu.ulima.classy.seguridad;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
-import pe.edu.ulima.classy.AutenticacionAdapter.NombreMail;
+import pe.edu.ulima.classy.seguridad.AutenticacionAdapter.NombreMail;
 
 /**
  *

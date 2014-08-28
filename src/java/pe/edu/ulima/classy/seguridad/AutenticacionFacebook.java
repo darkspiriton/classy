@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pe.edu.ulima.classy;
+package pe.edu.ulima.classy.seguridad;
 
 import facebook4j.Facebook;
 import facebook4j.FacebookFactory;

@@ -6,6 +6,7 @@
 
 package pe.edu.ulima.classy;
 
+import pe.edu.ulima.classy.seguridad.GestorUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import pe.edu.ulima.classy.AutenticacionAdapter.NombreMail;
+import pe.edu.ulima.classy.seguridad.AutenticacionAdapter.NombreMail;
 
 /**
  *

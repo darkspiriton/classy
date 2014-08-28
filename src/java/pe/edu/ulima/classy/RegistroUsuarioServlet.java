@@ -6,6 +6,7 @@
 
 package pe.edu.ulima.classy;
 
+import pe.edu.ulima.classy.seguridad.GestorUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
